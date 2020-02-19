@@ -41,7 +41,12 @@ class Core:
 
     def load_warriors(self, warriors, placement_jitter=0):
         if len(warriors) != self.core_settings.warrior_count:
-            raise ValueError("Amount of warriors passed mismatches with core settings.")
+            raise ValueError(
+                "Amount of warriors passed mismatches with core settings. "
+                "Got {} warriors but expected {}.".format(
+                    len(warriors), self.core_settings.warrior_count
+                )
+            )
 
         _exhaust_ma.lib.sim_clear_core()
         warrior_interval = self.core_settings.core_size // len(warriors)
