@@ -1,0 +1,3 @@
+[submodule "exhaust_ma/exhaust-ma"]
+	path = exhaust_ma/exhaust-ma
+	url = https://github.com/martinus/exhaust-ma

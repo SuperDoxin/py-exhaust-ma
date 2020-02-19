@@ -1,0 +1,2 @@
+include exhaust_ma/exhaust-ma/*
+exclude exhaust_ma/exhaust-ma/*.o

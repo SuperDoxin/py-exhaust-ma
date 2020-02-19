@@ -1,0 +1,6 @@
+venv
+_exhaust_ma.c
+*.o
+*.so
+__pycache__
+exhaust_ma/exhaust-ma
