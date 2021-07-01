@@ -57,7 +57,7 @@ To get going:
     # Create a virtual environment to prevent polluting your system python
     # installation
     python -m venv venv
-    source venv/bin/activate/
+    source venv/bin/activate
 
     # Install requirements
     pip install -r requirements.txt
