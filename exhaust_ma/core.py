@@ -10,6 +10,7 @@ class CoreSettings:
     processes = 8000
     warrior_count = 2
     max_cycles = 80000
+    pspace_size = 500
 
     def __setattr__(self, k, v):
         raise NotImplementedError("CoreSettings are immutable")
@@ -26,11 +27,12 @@ class Core:
         self.core_settings = core_settings
 
         # TODO pspace support
-        self.core = _exhaust_ma.lib.sim_alloc_bufs(
+        self.core = _exhaust_ma.lib.sim_alloc_bufs2(
             self.core_settings.warrior_count,
             self.core_settings.core_size,
             self.core_settings.processes,
             self.core_settings.max_cycles,
+            self.core_settings.pspace_size,
         )
 
         if self.core == _exhaust_ma.ffi.NULL:
@@ -49,6 +51,7 @@ class Core:
             )
 
         _exhaust_ma.lib.sim_clear_core()
+        _exhaust_ma.lib.sim_reset_pspaces()
         warrior_interval = self.core_settings.core_size // len(warriors)
         load_positions = []
         for i, warrior in enumerate(warriors):
