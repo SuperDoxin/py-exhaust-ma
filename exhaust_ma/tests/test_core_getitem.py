@@ -2,13 +2,7 @@ from .. import Warrior, CoreSettings, Core, Opcode  # , Mode, Modifier, Opcode
 
 
 def test_warrior_getitem():
-
-    class MyCoreSettings(CoreSettings):
-        core_size = 10
-        warrior_count = 1
-        max_cycles = 100
-
-    cs = MyCoreSettings()
+    cs = CoreSettings(core_size=10, warrior_count=1, max_cycles=100)
     w = Warrior.from_lines(cs, ["ORG START", "START mov.I $0,$1", "dat.X #2,   <3"])
     core = Core(cs)
 
@@ -23,4 +17,4 @@ def test_warrior_getitem():
 
     assert core[2].opcode == Opcode.MOV
 
-    assert len(core) == MyCoreSettings.core_size
+    assert len(core) == 10

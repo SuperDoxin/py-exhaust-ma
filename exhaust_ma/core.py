@@ -2,19 +2,18 @@ import _exhaust_ma
 import random
 from collections import namedtuple
 from .instruction import Instruction
+from dataclasses import dataclass
 
 BattleResult = namedtuple("BattleResult", ["dead", "alive"])
 
 
+@dataclass(frozen=True)
 class CoreSettings:
-    core_size = 8000
-    processes = 8000
-    warrior_count = 2
-    max_cycles = 80000
-    pspace_size = 500
-
-    def __setattr__(self, k, v):
-        raise NotImplementedError("CoreSettings are immutable")
+    core_size: int = 8000
+    processes: int = 8000
+    warrior_count: int = 2
+    max_cycles: int = 80000
+    pspace_size: int = 500
 
 
 class Core:

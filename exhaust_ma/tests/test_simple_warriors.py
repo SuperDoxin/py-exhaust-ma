@@ -95,10 +95,7 @@ def test_stalker_vs_imp_vs_imp():
     stalker = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc"
     imp = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc"
 
-    class ThreeWayCoreSettings(CoreSettings):
-        warrior_count = 3
-
-    cs = ThreeWayCoreSettings()
+    cs = CoreSettings(warrior_count=3)
     w1 = Warrior.from_filename(cs, stalker)
     w2 = Warrior.from_filename(cs, imp)
     w3 = Warrior.from_filename(cs, imp)

@@ -7,3 +7,4 @@ exhaust_ma/exhaust-ma
 py_exhaust_ma.egg-info
 build
 dist
+*.kate-swp
