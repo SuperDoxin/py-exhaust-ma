@@ -24,22 +24,26 @@ class Core:
             raise RuntimeError("A core already exists")
         Core._core_exists = True
 
-        self.core_settings = core_settings
+        try:
+            self.core_settings = core_settings
 
-        # TODO pspace support
-        self.core = _exhaust_ma.lib.sim_alloc_bufs2(
-            self.core_settings.warrior_count,
-            self.core_settings.core_size,
-            self.core_settings.processes,
-            self.core_settings.max_cycles,
-            self.core_settings.pspace_size,
-        )
+            # TODO pspace support
+            self.core = _exhaust_ma.lib.sim_alloc_bufs2(
+                self.core_settings.warrior_count,
+                self.core_settings.core_size,
+                self.core_settings.processes,
+                self.core_settings.max_cycles,
+                self.core_settings.pspace_size,
+            )
 
-        if self.core == _exhaust_ma.ffi.NULL:
-            raise RuntimeError("Failed to alocate memory for core.")
+            if self.core == _exhaust_ma.ffi.NULL:
+                raise RuntimeError("Failed to alocate memory for core.")
 
-        self.loaded_warriors = ()
-        self.load_positions = ()
+            self.loaded_warriors = ()
+            self.load_positions = ()
+        except Exception:
+            Core._core_exists = False
+            raise
 
     def load_warriors(self, warriors, placement_jitter=0):
         if len(warriors) != self.core_settings.warrior_count:
