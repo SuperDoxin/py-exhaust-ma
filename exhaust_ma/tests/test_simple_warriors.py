@@ -1,11 +1,11 @@
 from .. import Warrior, Core, CoreSettings
-from pkg_resources import resource_filename
 import pytest
+import importlib.resources
 
 
 def test_stalker_vs_imp():
-    stalker = resource_filename("exhaust_ma", "exhaust-ma/stalker.rc")
-    imp = resource_filename("exhaust_ma", "exhaust-ma/imp.rc")
+    stalker = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc"
+    imp = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc"
 
     cs = CoreSettings()
     w1 = Warrior.from_filename(cs, stalker)
@@ -26,24 +26,24 @@ def test_stalker_vs_imp():
 @pytest.mark.parametrize(
     "warrior_filename",
     [
-        resource_filename("exhaust_ma", "exhaust-ma/stalker.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/jaguar.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/spl.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/imp.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest4.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest6.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/pin1a.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest5.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/validate.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/pin1b.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest3.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/pin2b.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/pin2a.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest1.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/t/ptest2.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/stalker.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/fixed.rc"),
-        resource_filename("exhaust_ma", "exhaust-ma/npaper2.rc"),
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "jaguar.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "spl.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest4.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest6.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "pin1a.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest5.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "validate.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "pin1b.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest3.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "pin2b.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "pin2a.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest1.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "t" / "ptest2.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "fixed.rc",
+        importlib.resources.files("exhaust_ma") / "exhaust-ma" / "npaper2.rc",
     ],
 )
 def test_from_file(warrior_filename):
@@ -67,8 +67,8 @@ def test_from_file(warrior_filename):
 
 
 def test_stalker_vs_imp_from_file():
-    stalker = resource_filename("exhaust_ma", "exhaust-ma/stalker.rc")
-    imp = resource_filename("exhaust_ma", "exhaust-ma/imp.rc")
+    stalker = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc"
+    imp = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc"
 
     cs = CoreSettings()
     with open(stalker) as fp:
@@ -92,8 +92,8 @@ def test_stalker_vs_imp_from_file():
 
 
 def test_stalker_vs_imp_vs_imp():
-    stalker = resource_filename("exhaust_ma", "exhaust-ma/stalker.rc")
-    imp = resource_filename("exhaust_ma", "exhaust-ma/imp.rc")
+    stalker = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "stalker.rc"
+    imp = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc"
 
     class ThreeWayCoreSettings(CoreSettings):
         warrior_count = 3
