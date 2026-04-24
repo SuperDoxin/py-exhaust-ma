@@ -39,9 +39,18 @@ jobs:
       uses: astral-sh/setup-uv@v7
       with:
           python-version: 3.14
+    - name: Get submodules
+      run: |
+        git submodule update --init --recursive
+    - name: Create venv
+      run: |
+        uv venv --python 3.14 --managed-python
     - name: Install dependencies
       run: |
-        uv sync --locked --all-extras --dev  --no-progress
+        uv sync --locked --all-extras --dev --no-progress
+    - name: Build cffi module
+      run: |
+        uv run exhaust_ma/build_cffi.py
     - name: Run pre-commit hooks
       run: |
         uv run pre-commit run --all-files
