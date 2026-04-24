@@ -156,7 +156,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "cffi", specifier = ">=1.0.0" }]
+requires-dist = [{ name = "cffi", specifier = ">=2.0.0" }]
 
 [package.metadata.requires-dev]
 dev = [
