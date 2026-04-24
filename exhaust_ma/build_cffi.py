@@ -94,7 +94,6 @@ ffi.cdef("""
     void pspace_clear(pspace_t *p);
     void pspace_share(const pspace_t *shared, pspace_t *sharer);
     void pspace_privatise(pspace_t *p);
-
 """)
 
 if __name__ == "__main__":
