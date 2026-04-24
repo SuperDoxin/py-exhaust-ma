@@ -2,6 +2,7 @@ import _exhaust_ma
 
 from enum import Enum
 import os
+from dataclasses import dataclass
 
 
 class Opcode(Enum):
@@ -74,6 +75,37 @@ class AsmLine(Enum):
     OK = 1
 
 
+@dataclass
+class Field:
+    mode: Mode
+    value: int
+
+    def __str__(self):
+        return f"{self.mode.sigil}{self.value}"
+
+    def __repr__(self):
+        return f"Field({self})"
+
+
+@dataclass
+class Instruction:
+    opcode: Opcode
+    modifier: Modifier
+    a: Field
+    b: Field
+    start_flag: bool = False
+
+    def __str__(self):
+        return (
+            f"{'START: ' if self.start_flag else ''}"
+            f"{self.opcode.name}.{self.modifier.name}"
+            f"{self.a}, {self.b}"
+        )
+
+    def __repr__(self):
+        return f"Instruction({self})"
+
+
 class Warrior:
     def __init__(self, warrior_pt):
         self.warrior_pt = warrior_pt
@@ -92,34 +124,28 @@ class Warrior:
         else:
             return "Warrior({})".format(self.warrior_pt)
 
+    def __getitem__(self, i):
+        if i < 0:
+            i = self.warrior_pt.len + i
+        if i >= self.warrior_pt.len:
+            raise IndexError("index out of range")
+
+        instruction = self.warrior_pt.code[i]
+        in_ = getattr(instruction, "in")
+
+        return Instruction(
+            opcode=Opcode((in_ & 0b0001111000000000) >> 9),
+            modifier=Modifier((in_ & 0b0000000111000000) >> 6),
+            a=Field(Mode((in_ & 0b0000000000000111) >> 0), instruction.a),
+            b=Field(Mode((in_ & 0b0000000000111000) >> 3), instruction.b),
+            start_flag=bool(in_ & 0b0100000000000000),
+        )
+
     def __str__(self):
-        out = []
-
-        for i in range(self.warrior_pt.len):
-            opcode = self.warrior_pt.code[i]
-            in_ = getattr(opcode, "in")
-            a = opcode.a
-            b = opcode.b
-
-            a_mode = Mode((in_ & 0b0000000000000111) >> 0)
-            b_mode = Mode((in_ & 0b0000000000111000) >> 3)
-            modifier = Modifier((in_ & 0b0000000111000000) >> 6)
-            opcode = Opcode((in_ & 0b0001111000000000) >> 9)
-            flags_start = bool(in_ & 0b0100000000000000)
-
-            out.append(
-                "{:>6} {}.{} {}{}, {}{}".format(
-                    "start:" if flags_start else "",
-                    opcode.name,
-                    modifier.name,
-                    a_mode.sigil,
-                    a,
-                    b_mode.sigil,
-                    b,
-                )
-            )
-
-        return "\n".join(out)
+        return "\n".join(
+            str(instruction) if instruction.start_flag else f"      {instruction}"
+            for instruction in self
+        )
 
     @classmethod
     def from_filename(cls, core_settings, filename):
