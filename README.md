@@ -29,12 +29,12 @@ c.load_warriors([w1, w2])
 print(c.run())
 ```
 
-[Exhaust-MA](https://github.com/martinus/exhaust-ma) includes a set of warriors which you can access using setuptools pkg_resources:
+[Exhaust-MA](https://github.com/martinus/exhaust-ma) includes a set of warriors which you can access using importlib.resources:
 
 ```python
-from pkg_resources import resource_filename
+import importlib.resources
 
-jaguar = resource_filename("exhaust_ma", "exhaust-ma/jaguar.rc")
+jaguar = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "jaguar.rc"
 ```
 
 A full list of included files can be found [In the exhaust-MA repository.](https://github.com/martinus/exhaust-ma)
@@ -54,25 +54,14 @@ To get going:
     git submodule init
     git submodule update
 
-    # Create a virtual environment to prevent polluting your system python
-    # installation
-    python -m venv venv
-    source venv/bin/activate
-
-    # Install requirements
-    pip install -r requirements.txt
-
     # Activate pre-commit hooks
     pre-commit install
-
-    # Build the exhaust-ma cffi library
-    python exhaust_ma/build_cffi.py
 ```
 
 At this point running
 
 ```bash
-    python -m exhaust_ma
+    uv run -m exhaust_ma
 ```
 
 Should output

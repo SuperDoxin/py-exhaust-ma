@@ -1,0 +1,26 @@
+[project]
+name = "py-exhaust-ma"
+version = "0.1.0"
+description = "Fast CoreWars redcode simulator, python bindings."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "cffi>=1.0.0",
+]
+keywords = ["corewars", "redcode", "mars"]
+
+
+[build-system]
+requires = ["setuptools>=64", "wheel", "cffi>=1.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["exhaust_ma"]
+
+[tool.setuptools.package-data]
+exhaust_ma = ["*"]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.0",
+]

@@ -1,8 +1,8 @@
 from . import Warrior, Core, CoreSettings
-from pkg_resources import resource_filename
+import importlib.resources
 
-jaguar = resource_filename("exhaust_ma", "exhaust-ma/jaguar.rc")
-imp = resource_filename("exhaust_ma", "exhaust-ma/imp.rc")
+jaguar = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "jaguar.rc"
+imp = importlib.resources.files("exhaust_ma") / "exhaust-ma" / "imp.rc"
 
 cs = CoreSettings()
 w1 = Warrior.from_filename(cs, jaguar)

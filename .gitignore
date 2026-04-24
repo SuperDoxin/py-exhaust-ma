@@ -4,3 +4,6 @@ _exhaust_ma.c
 *.so
 __pycache__
 exhaust_ma/exhaust-ma
+py_exhaust_ma.egg-info
+build
+dist

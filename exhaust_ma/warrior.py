@@ -127,7 +127,7 @@ class Warrior:
 
         warrior_pt = _exhaust_ma.ffi.new("warrior_t*")
         _exhaust_ma.lib.asm_fname(
-            filename.encode("utf-8"), warrior_pt, core_settings.core_size
+            str(filename).encode("utf-8"), warrior_pt, core_settings.core_size
         )
         instance = cls(warrior_pt)
         instance.name = os.path.basename(filename)
