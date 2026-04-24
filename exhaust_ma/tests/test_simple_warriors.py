@@ -79,10 +79,10 @@ def test_stalker_vs_imp_from_file():
         w2 = Warrior.from_file(cs, fp)
     w2.name = "imp"
 
-    c = Core(cs)
-    c.load_warriors([w1, w2])
+    with Core(cs) as c:
+        c.load_warriors([w1, w2])
 
-    result = c.run()
+        result = c.run()
 
     assert w1 in result.alive
     assert w1 not in result.dead
@@ -100,10 +100,10 @@ def test_stalker_vs_imp_vs_imp():
     w2 = Warrior.from_filename(cs, imp)
     w3 = Warrior.from_filename(cs, imp)
 
-    c = Core(cs)
-    c.load_warriors([w1, w2, w3])
+    with Core(cs) as c:
+        c.load_warriors([w1, w2, w3])
 
-    result = c.run()
+        result = c.run()
 
     assert w1 in result.alive
     assert w1 not in result.dead
