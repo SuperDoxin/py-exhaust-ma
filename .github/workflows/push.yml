@@ -11,24 +11,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Remove system Python
-      # This is to avoid uv picking up the system python version. a bit
-      # icky but it does the job.
-      run: |
-        rm /usr/local/bin/python
-        rm /usr/bin/python3.12
-
     - name: Install uv with Python ${{ matrix.python-version }}
       uses: astral-sh/setup-uv@v7
       with:
           python-version: ${{ matrix.python-version }}
-          python-preference: only-managed
     - name: Get submodules
       run: |
         git submodule update --init --recursive
     - name: Create venv
       run: |
-        uv venv --python ${{ matrix.python-version }}
+        uv venv --python ${{ matrix.python-version }} --managed-python
     - name: Install dependencies
       run: |
         uv sync --locked --all-extras --dev --no-progress
