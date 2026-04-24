@@ -3,15 +3,16 @@ name = "py-exhaust-ma"
 version = "0.1.0"
 description = "Fast CoreWars redcode simulator, python bindings."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.10"
 dependencies = [
     "cffi>=2.0.0",
+    "setuptools>=82.0.1",
 ]
 keywords = ["corewars", "redcode", "mars"]
 
 
 [build-system]
-requires = ["setuptools>=64", "wheel", "cffi>=2.0.0"]
+requires = ["setuptools>=82.0.1", "wheel", "cffi>=2.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
@@ -24,4 +25,5 @@ exhaust_ma = ["*"]
 dev = [
     "pre-commit>=4.6.0",
     "pytest>=9.0.3",
+    "setuptools>=82.0.1",
 ]

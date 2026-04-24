@@ -16,8 +16,7 @@ ffi.set_source(
     include_dirs=["exhaust_ma/exhaust-ma/"],
 )
 
-ffi.cdef(
-    """
+ffi.cdef("""
     typedef unsigned char  u8_t;
     typedef unsigned short u16_t;
     typedef unsigned long  u32_t;
@@ -96,8 +95,7 @@ ffi.cdef(
     void pspace_share(const pspace_t *shared, pspace_t *sharer);
     void pspace_privatise(pspace_t *p);
 
-"""
-)
+""")
 
 if __name__ == "__main__":
     ffi.compile(verbose=True)

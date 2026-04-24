@@ -1,0 +1,55 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Remove system Python
+      # This is to avoid uv picking up the system python version. a bit
+      # icky but it does the job.
+      run: |
+        rm /usr/local/bin/python
+        rm /usr/bin/python3.12
+
+    - name: Install uv with Python ${{ matrix.python-version }}
+      uses: astral-sh/setup-uv@v7
+      with:
+          python-version: ${{ matrix.python-version }}
+          python-preference: only-managed
+    - name: Get submodules
+      run: |
+        git submodule update --init --recursive
+    - name: Create venv
+      run: |
+        uv venv --python ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        uv sync --locked --all-extras --dev --no-progress
+    - name: Build cffi module
+      run: |
+        uv run exhaust_ma/build_cffi.py
+    - name: Run tests
+      run: |
+        uv run pytest
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install uv with Python 3.14
+      uses: astral-sh/setup-uv@v7
+      with:
+          python-version: 3.14
+    - name: Install dependencies
+      run: |
+        uv sync --locked --all-extras --dev  --no-progress
+    - name: Run pre-commit hooks
+      run: |
+        uv run pre-commit run --all-files
