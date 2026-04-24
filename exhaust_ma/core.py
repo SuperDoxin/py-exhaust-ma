@@ -1,10 +1,14 @@
 import _exhaust_ma
 import random
-from collections import namedtuple
 from .instruction import Instruction
+from .warrior import Warrior
 from dataclasses import dataclass
 
-BattleResult = namedtuple("BattleResult", ["dead", "alive"])
+
+@dataclass
+class BattleResult:
+    dead: list[Warrior]
+    alive: set[Warrior]
 
 
 @dataclass(frozen=True)
