@@ -1,6 +1,7 @@
 import _exhaust_ma
 import random
 from collections import namedtuple
+from .instruction import Instruction
 
 BattleResult = namedtuple("BattleResult", ["dead", "alive"])
 
@@ -44,6 +45,17 @@ class Core:
         except Exception:
             Core._core_exists = False
             raise
+
+    def __len__(self):
+        return self.core_settings.core_size
+
+    def __getitem__(self, i):
+        if i < 0:
+            i = self.core_settings.core_size + i
+        if i >= self.core_settings.core_size:
+            raise IndexError("index out of range")
+
+        return Instruction.from_insn_t(self.core[i])
 
     def load_warriors(self, warriors, placement_jitter=0):
         if len(warriors) != self.core_settings.warrior_count:
