@@ -1,5 +1,5 @@
 # Py-Exhaust-MA
-![Tests](https://github.com/SuperDoxin/py-exhaust-ma/workflows/Tests/badge.svg?branch=master) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/SuperDoxin/Py-Exhaust-Ma) ![GitHub issues](https://img.shields.io/github/issues/SuperDoxin/Py-Exhaust-Ma) ![GitHub](https://img.shields.io/github/license/SuperDoxin/Py-Exhaust-Ma) ![Awesome?](https://img.shields.io/badge/awesome%3F-yes!-green)
+[![Tests](https://github.com/SuperDoxin/py-exhaust-ma/actions/workflows/push.yml/badge.svg)](https://github.com/SuperDoxin/py-exhaust-ma/actions/workflows/push.yml) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/SuperDoxin/Py-Exhaust-Ma) ![GitHub issues](https://img.shields.io/github/issues/SuperDoxin/Py-Exhaust-Ma) ![GitHub](https://img.shields.io/github/license/SuperDoxin/Py-Exhaust-Ma) ![Awesome?](https://img.shields.io/badge/awesome%3F-yes!-green)
 
 [Exhaust-MA](https://github.com/martinus/exhaust-ma) is a highly optimized Redcode simulator. Py-Exhaust-MA is the python bindings for [Exhaust-MA](https://github.com/martinus/exhaust-ma).
 
