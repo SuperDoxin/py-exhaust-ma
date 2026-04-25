@@ -45,6 +45,8 @@ class Core:
             if self.core == _exhaust_ma.ffi.NULL:
                 raise RuntimeError("failed to alocate memory for core.")
 
+            _exhaust_ma.lib.sim_clear_core()
+
             self.loaded_warriors = ()
             self.load_positions = ()
         except Exception:
