@@ -1,6 +1,6 @@
 [project]
 name = "py-exhaust-ma"
-version = "0.1.0"
+version = "0.0.4"
 description = "Fast CoreWars redcode simulator, python bindings."
 readme = "README.md"
 requires-python = ">=3.10"
