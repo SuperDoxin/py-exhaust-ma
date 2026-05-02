@@ -17,7 +17,7 @@ class Opcode(Enum):
     JMP = 11
     NOP = 12
     MUL = 13
-    MODM = 14
+    MOD = 14
     DIV = 15
     LDP = 16
     STP = 17
