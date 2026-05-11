@@ -98,7 +98,7 @@ class Instruction:
     def from_insn_t(cls, instruction):
         in_ = getattr(instruction, "in")
         return Instruction(
-            opcode=Opcode((in_ & 0b0001111000000000) >> 9),
+            opcode=Opcode((in_ & 0b0011111000000000) >> 9),
             modifier=Modifier((in_ & 0b0000000111000000) >> 6),
             a=Field(Mode((in_ & 0b0000000000000111) >> 0), instruction.a),
             b=Field(Mode((in_ & 0b0000000000111000) >> 3), instruction.b),

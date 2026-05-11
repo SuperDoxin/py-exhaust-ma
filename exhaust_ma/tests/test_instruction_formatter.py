@@ -47,7 +47,7 @@ def test_instruction_formatter():
             "MUL.F $6, $7",
             "MOD.F $8, $9",
             "DIV.F $10, $11",
-            "DAT.F $12, $13",
-            "SPL.F $14, $15",
+            "LDP.F $12, $13",
+            "STP.F $14, $15",
             "DAT.F $0, $0",
         ]
